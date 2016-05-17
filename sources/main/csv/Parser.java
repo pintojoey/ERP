@@ -10,27 +10,22 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 
-//import com.opencsv.CSVReader;
-//import com.opencsv.CSVWriter;
 /**
  * @author Arushi
  *
  */
 public class Parser {
-	public ArrayList<ArrayList<String>>	array;
-	int r,c;
-	String csvFile;
-	private static final String COMMA_DELIMITER = ",";
+	 private ArrayList<ArrayList<String>>	array;
+	String file_name;
+	private static final String DELIMITER = ",";
 	
-	    private static final String NEW_LINE_SEPARATOR = "\n";
+	private static final String NEW_LINE_SEPARATOR = "\n";
 
-	public Parser(){
-		array = new ArrayList<ArrayList<String>>();
-	}
+	
 
 	public void ensureCapacity(int num)
 	{
-		array.ensureCapacity(num);
+		getArray().ensureCapacity(num);
 	}
  
 	/**
@@ -45,9 +40,9 @@ public class Parser {
 		ensureCapacity(row);
 		while (row < getNumRows())
 		{
-			array.add(new ArrayList<String>());
+			getArray().add(new ArrayList<String>());
 		}
-		array.get(row).ensureCapacity(num);
+		getArray().get(row).ensureCapacity(num);
 	}
  
 	/**
@@ -58,32 +53,32 @@ public class Parser {
 		ensureCapacity(row);
 		while(row >= getNumRows())
 		{
-			array.add(new ArrayList<String>());
+			getArray().add(new ArrayList<String>());
 		}
-		array.get(row).add(data);
+		getArray().get(row).add(data);
 	}
  
 	public String get(int row, int col)
 	{
-		return array.get(row).get(col);
+		return getArray().get(row).get(col);
 	}
  
 	public void set(int row, int col, String data)
 	{
 		//System.out.println("array size"+array.get(row).size());
-		array.get(row).set(col,data);
+		getArray().get(row).set(col,data);
 	}
  
 	public void remove(int row, int col)
 	{
-		array.get(row).remove(col);
+		getArray().get(row).remove(col);
 	}
  
 	public boolean contains(String data)
 	{
-		for (int i = 0; i < array.size(); i++)
+		for (int i = 0; i < getArray().size(); i++)
 		{
-			if (array.get(i).contains(data))
+			if (getArray().get(i).contains(data))
 			{
 				return true;
 			}
@@ -93,17 +88,23 @@ public class Parser {
  
 	public int getNumRows()
 	{
-		return array.size();
+		return getArray().size();
 	}
  
 	public int getNumCols(int row)
 	{
-		return array.get(row).size();
+		return getArray().get(row).size();
+	}
+	public int getNumCols()
+	{   int max_colums=0;
+	   for(int i=0;i<getNumRows();i++)
+		   if(max_colums<=getArray().get(i).size())max_colums=getArray().get(i).size();
+		return max_colums;
 	}
 	
 	public static void main(String args[]){
-		Parser obj=new Parser();
-		obj.run(new Parser().csvFile);
+		Parser obj=new Parser("registration.csv");
+		System.out.println(obj.getNumCols());
 	}
 	
 	public void printList(){
@@ -123,28 +124,26 @@ public class Parser {
 			if(colName.equals(get(0,i))){
 				return i;
 			}
-			//System.out.println(get(2,i));
 			
 		}
-		//CSVFunctions obj1=new CSVFunctions();
 		Add(colName,0);
 		
-		write(csvFile,-1);
+		write(file_name,-1);
 			return 0;
 	}
 	
-	public void run(String csvfile) {
-
-		//String csvFile = "c1.csv";
-		csvFile=csvfile;
+	public Parser(String csvfile) {
+		int r;
+		setArray(new ArrayList<ArrayList<String>>());
+		
+		file_name=csvfile;
 		BufferedReader br = null;
 		String line = "";
-		String csvSplitBy = ",";
 
 		try {
              
 			try {
-				br = new BufferedReader(new FileReader(csvFile));
+				br = new BufferedReader(new FileReader(file_name));
 			} catch (FileNotFoundException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -154,12 +153,9 @@ public class Parser {
 			try {
 				while ((line = br.readLine()) != null) {
 
-				        // use comma as separator
-					String[] arr = line.split(csvSplitBy);
+					String[] arr = line.split(DELIMITER);
 					
-					//System.out.println("cols="+getNumCols(0));
 					for(int i=0;i<arr.length;i++){
-						//System.out.println(arr[i]);
 						Add(arr[i],r);
 					
 					}
@@ -170,16 +166,6 @@ public class Parser {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			
-		//printList();
-		//set(14,5,"arushi");
-		//System.out.println(get(14,5));
-		//System.out.println(checkAndAddColumn("Signature"));
-		//System.out.println(contains("Gender"));
-		//updateCSV("c1.csv","arushi",3,1);
-		//printList();
-			//removeColumn("Signature");
-		//removeBlankColumn();
 
 		} finally {
 			if (br != null) {
@@ -191,23 +177,16 @@ public class Parser {
 			}
 		}
 
-		System.out.println("Done");
 	  }
-	public void updateCSV(String fileToUpdate, String replace,
-		    int r, int c) throws IOException {
+	public void updateCSV(String fileToUpdate, String replace,int r, int c) throws IOException {
 
-		//System.out.println("hello");
-		//Parser.FileWriter.writeFile(new CSVFunctions().array.toString(),"c1.csv");*/
-		//System.out.println(get(r,c));
 		set(r,c,replace);
-		write(csvFile,-1);
+		write(file_name,-1);
 		
 		
 		}
-	
+	//TODO incomplete code
 	public void removeBlankColumn(){
-		int count=0;
-		System.out.println("hello");
 		for(int i=0;i<getNumCols(2);i++){
 			for(int j=0;j<getNumRows();j++){
 				System.out.println(get(j,i));
@@ -222,7 +201,7 @@ public class Parser {
 		}
 	}
 	
-	public int EmptyRows(String colName){
+	public int EmptyRows(){
 		int count=0;int empty=0;
 		for(int i=0;i<getNumRows();i++){
 			for(int j=0;j<getNumCols(i);j++){
@@ -244,7 +223,7 @@ public class Parser {
 			//System.out.println(get(2,i));
 			
 		}
-		write(csvFile,c);
+		write(file_name,c);
 	}
 	public void write(String filename,int c){
 		FileWriter fileWriter = null;
@@ -257,7 +236,7 @@ public class Parser {
 	    		for(int j=0;j<getNumCols(i);j++){
 	    			//System.out.println(get(i,j));
 	    			fileWriter.append(get(i,j));
-	    			fileWriter.append(COMMA_DELIMITER);
+	    			fileWriter.append(DELIMITER);
 	    		}
 	    		//fileWriter.append(get(i,getNumCols(i)));
 	    		fileWriter.append(NEW_LINE_SEPARATOR);
@@ -271,7 +250,7 @@ public class Parser {
 		    			if(j==c){continue;}
 		    			else{
 		    			fileWriter.append(get(i,j));
-		    			fileWriter.append(COMMA_DELIMITER);}
+		    			fileWriter.append(DELIMITER);}
 		    		}
 		    		//fileWriter.append(get(i,getNumCols(i)));
 		    		fileWriter.append(NEW_LINE_SEPARATOR);
@@ -300,6 +279,20 @@ public class Parser {
 	    	            }
 	    	    }
 }
+
+	/**
+	 * @return the array
+	 */
+	public ArrayList<ArrayList<String>> getArray() {
+		return array;
+	}
+
+	/**
+	 * @param array the array to set
+	 */
+	public void setArray(ArrayList<ArrayList<String>> array) {
+		this.array = array;
+	}
 	
 	
 }

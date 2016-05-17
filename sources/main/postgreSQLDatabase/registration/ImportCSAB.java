@@ -4,8 +4,6 @@
 package postgreSQLDatabase.registration;
 
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -19,7 +17,6 @@ import org.json.JSONObject;
  */
 public class ImportCSAB {
 
-	static Connection conn ;
 	/**
 	 * @param args
 	 * @throws IOException 
@@ -32,8 +29,8 @@ public class ImportCSAB {
 	}
 	public  void createJSON(String filename) throws IOException, SQLException{
 		int k=0;
-		csv.Parser obj=new csv.Parser();
-        obj.run(filename);
+		csv.Parser obj=new csv.Parser(filename);
+       
        // JSONArray jarray=new JSONArray();
         String[] colname=new String[obj.getNumCols(0)];
         String jarray[]=new String[obj.getNumRows()-1];
@@ -77,7 +74,7 @@ public class ImportCSAB {
 		}
         
         int col_no=0;
-        ArrayList<ArrayList<String>> list=obj.array;
+        ArrayList<ArrayList<String>> list=obj.getArray();
         Iterator<ArrayList<String>> iterator = list.iterator();
         iterator.next();
         int index=-1;
@@ -109,30 +106,13 @@ public class ImportCSAB {
         }
         
         //System.out.println(jarray);
-        PreparedStatement proc = ImportCSAB.getConnection().prepareStatement("SELECT public.\"addCSABData\"(?);");
-        proc.setArray(1, getConnection().createArrayOf("json", jarray));
-       // proc.setObject(1, jarray);
-      //  System.out.println(getConnection().createArrayOf("text", question.getAnswer().toArray()));
-       // proc.executeQuery();
+        PreparedStatement proc = settings.database.PostgreSQLConnection.getConnection().prepareStatement("SELECT public.\"addCSABData\"(?);");
+        proc.setArray(1, settings.database.PostgreSQLConnection.getConnection().createArrayOf("json", jarray));
+      
         
         System.out.println(proc);
         
 	}
 	
-	public static Connection getConnection() throws SQLException{
-
-		if(conn==null){
-			try {
-				Class.forName("org.postgresql.Driver");
-			} catch (ClassNotFoundException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			conn = DriverManager
-					.getConnection("jdbc:postgresql://172.16.1.231:5432/iiitk",
-							"developer", "developer");
-		}
-		return conn;
-	}
-
+	
 }

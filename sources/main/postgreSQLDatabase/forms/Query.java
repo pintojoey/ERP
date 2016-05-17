@@ -3,8 +3,6 @@
  */
 package postgreSQLDatabase.forms;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -28,33 +26,12 @@ public class Query {
 
 	}
 
-
-
-	static Connection conn ;
-	/**
-	 * @return a new connection to postgreSQL
-	 * @throws SQLException
-	 */
-	public static Connection getConnection() throws SQLException{
-
-		if(conn==null){
-			try {
-				Class.forName("org.postgresql.Driver");
-			} catch (ClassNotFoundException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			conn = DriverManager
-					.getConnection("jdbc:postgresql://172.16.1.231:5432/iiitk",
-							"developer", "developer");
-		}
-		return conn;
-	}
+ 
 
 	
 	
 	public static void addForm(String name,String fields,String format) throws SQLException{
-	PreparedStatement proc = getConnection().prepareStatement("SELECT public.\"addForm\"(?,?,?);");
+	PreparedStatement proc = settings.database.PostgreSQLConnection.getConnection().prepareStatement("SELECT public.\"addForm\"(?,?,?);");
 	proc.setString(1, name);
 	proc.setString(2, fields);
 	proc.setString(3, format);
@@ -67,7 +44,7 @@ public class Query {
 		ArrayList<String> list=new ArrayList<String>();
 		
 		try {
-		PreparedStatement proc = getConnection().prepareStatement("SELECT public.\"getFormName\"();");
+		PreparedStatement proc = settings.database.PostgreSQLConnection.getConnection().prepareStatement("SELECT public.\"getFormName\"();");
 	 
 	
 			ResultSet rs=proc.executeQuery();
@@ -104,7 +81,7 @@ public static String getFields(String formname){
 		String fields ="SaM";
 		
 		try {
-		PreparedStatement proc = getConnection().prepareStatement("SELECT public.\"getRequiredFields\"(?);");
+		PreparedStatement proc = settings.database.PostgreSQLConnection.getConnection().prepareStatement("SELECT public.\"getRequiredFields\"(?);");
 		proc.setString(1, formname);
 	
 			ResultSet rs=proc.executeQuery();
@@ -114,7 +91,7 @@ public static String getFields(String formname){
 			  rs.next();
 			  
 			  if(rs==null){
-				return  null;  
+				return  "";  
 			  }
 			  
 			  JSONArray j_array=new JSONArray(rs.getString(1));
@@ -146,7 +123,7 @@ public static String getFormat(String formname){
 	String format ="SaM";
 	
 	try {
-	PreparedStatement proc = getConnection().prepareStatement("SELECT public.\"getFormFormat\"(?);");
+	PreparedStatement proc = settings.database.PostgreSQLConnection.getConnection().prepareStatement("SELECT public.\"getFormFormat\"(?);");
 	proc.setString(1, formname);
 
 		ResultSet rs=proc.executeQuery();

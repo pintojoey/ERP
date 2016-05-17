@@ -77,7 +77,7 @@ public class GenerateFeeReceipt extends HttpServlet {
 //	//	response.sendRedirect("studentRegistration/congratulations.jsp");
 response.setContentType("application/pdf");
 		
-		Document document =new Document(com.itextpdf.text.PageSize.A4);
+	//	Document document =new Document(com.itextpdf.text.PageSize.A4);
 		
 		
 		try{

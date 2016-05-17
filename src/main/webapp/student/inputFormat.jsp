@@ -125,7 +125,24 @@
 	  <textarea cols="80" id="editor1" name="editor1" rows="10"></textarea>   	
 		
         <script>
+        CKEDITOR.config.height='420mm';
+       CKEDITOR.config.width='297mm';
+	   
+	    CKEDITOR.on('instanceReady', function() {;
+	    var iframe=document.getElementsByClassName("cke_wysiwyg_frame cke_reset")[0].contentDocument;
+	    iframe.body.style.backgroundColor = "#b0b0b0";
+	    iframe.body.style.width='297mm';
+	    iframe.body.style.height='420mm';
+	    iframe.body.style.margin='0mm';
+	    iframe.body.style.padding='5mm';
+	    
+	
+		
+	});
 	    CKEDITOR.replace( 'editor1' );
+	   // CKEDITOR.instances['editor1'].resize( 900, 300 );
+	    
+	    
          </script>
 			
 		

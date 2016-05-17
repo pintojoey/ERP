@@ -90,6 +90,7 @@
                   <th>Registration Id</th>	
                   <th>Name</th>
                   <th>Verified Status</th>
+                   <th>StudentID</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -127,6 +128,7 @@
                   <td><%=current.getRegistration_id() %></td>
                   <td><%=current.getName() %></td>
                   <td><%=status_msg%></td>
+                  <td><%=current.getStudent_id() %></td>
                 </tr>
 				<%
                 }

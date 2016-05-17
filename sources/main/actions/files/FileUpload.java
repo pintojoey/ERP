@@ -29,7 +29,7 @@ public class FileUpload extends HttpServlet {
     protected void doPost(HttpServletRequest request,
             HttpServletResponse response) throws ServletException, IOException {
         // gets absolute path of the web application
-        String applicationPath = request.getServletContext().getRealPath("");
+        String applicationPath = request.getServletPath();
         // constructs path of the directory to save uploaded file
         String uploadFilePath = applicationPath + File.separator + UPLOAD_DIR;
           System.out.println(uploadFilePath);

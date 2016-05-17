@@ -3,8 +3,6 @@
  */
 package postgreSQLDatabase.feePayment;
 
-import java.io.UnsupportedEncodingException;
-import java.net.URLDecoder;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;

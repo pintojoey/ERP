@@ -3,8 +3,6 @@
  */
 package postgreSQLDatabase.chats;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -20,28 +18,7 @@ import org.json.JSONObject;
  *
  */
 public class Query {
-	static Connection conn ;
-
-	public static Connection getConnection() {
-
-		if(conn==null){
-			try {
-				Class.forName("org.postgresql.Driver");
-			} catch (ClassNotFoundException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			try {
-				conn = DriverManager
-						.getConnection("jdbc:postgresql://172.16.1.231:5432/iiitk",
-								"developer", "developer");
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		}
-		return conn;
-	}
+	
 	public static void getAllUnreadMessages(long user_id){
 
 
@@ -49,16 +26,13 @@ public class Query {
 		PreparedStatement proc;
 		ArrayList<Message> history_info=new ArrayList<Message>();
 		try {
-			proc = getConnection().prepareStatement("SELECT public.\"getAllUnreadMessages\"(?);");
+			proc = settings.database.PostgreSQLConnection.getConnection().prepareStatement("SELECT public.\"getAllUnreadMessages\"(?);");
 
 
 			proc.setObject(1, user_id);
 			ResultSet rs=proc.executeQuery();
-			System.out.println(proc);
 			rs.next();
 			String postgre=rs.getString(1);
-			//System.out.println(postgre);
-			System.out.println("["+postgre.substring(1,postgre.length()-1)+"]");
 			//JSONArray jArray=new JSONArray(rs.getString(1));
 			JSONArray jArray = new JSONArray("["+postgre.substring(1,postgre.length()-1)+"]");
 			//System.out.println("["+postgre.substring(1,postgre.length()-1)+"]");
@@ -79,7 +53,6 @@ public class Query {
 					current.setTime_stamp(new java.sql.Date(new SimpleDateFormat("yyyy-MM-dd hh:mm:ss.SSSSSS").parse(msg_jobj.getString("timestamp")).getTime()));
 					alist_msgs.add(current);
 				}
-				System.out.println(convo_id+" "+current);
 			}
 
 
@@ -97,11 +70,7 @@ public class Query {
 		}
 		//	return history_info; 
 	}
-	public static void main(String[] args) {
-
-		getAllUnreadMessages(4);
-
-	}
+	
 }
 
 

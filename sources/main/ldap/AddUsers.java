@@ -15,7 +15,7 @@ import utilities.StringFormatter;
  *
  */
 public class AddUsers {
-	Parser obj=new csv.Parser();
+	Parser obj;
 	
 	/**
 	 * @param args
@@ -28,7 +28,7 @@ public class AddUsers {
 
 	}
 	public String addUser(String...s) throws IOException{
-		obj.run("firstyear.csv");
+		obj=new Parser("firstyear.csv");
 		int k=0;
 		int j[]=new int[s.length];
 		String username,first_name,last_name,password;

@@ -6,24 +6,7 @@
 	<display-name>ArchetypeCreatedWebApplication</display-name>
 	<!--student -->
 	<!--office -->
-	<filter>
-		<filter-name>Session</filter-name>
-		<display-name>Session</display-name>
-		<description>check session presence</description>
-		<filter-class>actions.authentication.Session</filter-class>
-	</filter>
-	<filter-mapping>
-		<filter-name>Session</filter-name>
-		<url-pattern>/student/*</url-pattern>
-	</filter-mapping>
-	<filter-mapping>
-		<filter-name>Session</filter-name>
-		<url-pattern>/office/*</url-pattern>
-	</filter-mapping>
-	<filter-mapping>
-		<filter-name>Session</filter-name>
-		<url-pattern>/administration/*</url-pattern>
-	</filter-mapping>
+
 
 	<!--onlineTest -->
 	<servlet>
@@ -163,55 +146,9 @@
 		<servlet-name>RetriveNotifications</servlet-name>
 		<url-pattern>/RetriveNotifications</url-pattern>
 	</servlet-mapping>
-	<!--attendance -->
-	<servlet>
-		<servlet-name>AjaxController</servlet-name>
-		<display-name>AjaxController</display-name>
-		<description></description>
-		<servlet-class>actions.attendance.AjaxController</servlet-class>
-	</servlet>
 
-	<servlet-mapping>
-		<servlet-name>AjaxController</servlet-name>
-		<url-pattern>/AjaxController</url-pattern>
-	</servlet-mapping>
-	<servlet>
-		<servlet-name>GetSubjectAllocation</servlet-name>
-		<display-name>GetSubjectAllocation</display-name>
-		<description></description>
-		<servlet-class>actions.attendance.GetSubjectAllocation</servlet-class>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>GetSubjectAllocation</servlet-name>
-		<url-pattern>/GetSubjectAllocation</url-pattern>
-	</servlet-mapping>
-	<servlet>
-		<servlet-name>InsertAttendance</servlet-name>
-		<display-name>InsertAttendance</display-name>
-		<description></description>
-		<servlet-class>actions.attendance.InsertAttendance</servlet-class>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>InsertAttendance</servlet-name>
-		<url-pattern>/InsertAttendance</url-pattern>
-	</servlet-mapping>
-
-	<servlet>
-		<servlet-name>StudentsList</servlet-name>
-		<display-name>StudentsList</display-name>
-		<description></description>
-		<servlet-class>actions.attendance.StudentsList</servlet-class>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>StudentsList</servlet-name>
-		<url-pattern>/StudentsList</url-pattern>
-	</servlet-mapping>
-
-	<!--authentication -->
-	<servlet>
-		<servlet-name>SignIn</servlet-name>
-		<servlet-class>actions.authentication.SignIn</servlet-class>
-	</servlet>
+	
+	
 	<servlet>
 		<servlet-name>VerifyFeePayment</servlet-name>
 		<display-name>VerifyFeePayment</display-name>
@@ -230,12 +167,7 @@
 		<description></description>
 		<servlet-class>actions.files.FileUpload</servlet-class>
 	</servlet>
-	<servlet>
-		<servlet-name>S1</servlet-name>
-		<display-name>S1</display-name>
-		<description></description>
-		<servlet-class>actions.attendance.S1</servlet-class>
-	</servlet>
+	
 	<servlet>
 		<servlet-name>RegisterStudent</servlet-name>
 		<display-name>RegisterStudent</display-name>
@@ -248,38 +180,7 @@
 		<url-pattern>/FileUpload</url-pattern>
 	</servlet-mapping>
 
-	<servlet-mapping>
-		<servlet-name>SignIn</servlet-name>
-		<url-pattern>/SignIn</url-pattern>
-	</servlet-mapping>
-	<servlet>
-		<servlet-name>SignOut</servlet-name>
-		<servlet-class>actions.authentication.SignOut</servlet-class>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>SignOut</servlet-name>
-		<url-pattern>/SignOut</url-pattern>
-	</servlet-mapping>
-	<servlet>
-		<servlet-name>UpdateLastSeen</servlet-name>
-		<display-name>UpdateLastSeen</display-name>
-		<description></description>
-		<servlet-class>actions.authentication.UpdateLastSeen</servlet-class>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>UpdateLastSeen</servlet-name>
-		<url-pattern>/UpdateLastSeen</url-pattern>
-	</servlet-mapping>
-	<servlet>
-		<servlet-name>AutoSuggest</servlet-name>
-		<display-name>AutoSuggest</display-name>
-		<description></description>
-		<servlet-class>actions.authentication.AutoSuggest</servlet-class>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>AutoSuggest</servlet-name>
-		<url-pattern>/AutoSuggest</url-pattern>
-	</servlet-mapping>
+	
 	<!--chats -->
 	<servlet>
 		<servlet-name>RetrieveMessage</servlet-name>
@@ -391,12 +292,7 @@
 		<description></description>
 		<servlet-class>actions.registration.CsabStudentProfile</servlet-class>
 	</servlet>
-	<servlet>
-		<servlet-name>ResetPassword</servlet-name>
-		<display-name>ResetPassword</display-name>
-		<description></description>
-		<servlet-class>actions.authentication.ResetPassword</servlet-class>
-	</servlet>
+	
 	<servlet>
 		<servlet-name>RetrieveRegistrationStudentData</servlet-name>
 		<display-name>RetrieveRegistrationStudentData</display-name>
@@ -434,10 +330,7 @@
 		<servlet-name>CsabStudentProfile</servlet-name>
 		<url-pattern>/CsabStudentProfile</url-pattern>
 	</servlet-mapping>
-	<servlet-mapping>
-		<servlet-name>ResetPassword</servlet-name>
-		<url-pattern>/ResetPassword</url-pattern>
-	</servlet-mapping>
+	
 	<servlet-mapping>
 		<servlet-name>RetrieveRegistrationStudentData</servlet-name>
 		<url-pattern>/RetrieveRegistrationStudentData</url-pattern>

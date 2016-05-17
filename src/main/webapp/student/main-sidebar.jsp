@@ -27,7 +27,12 @@
       <!-- sidebar menu: : style can be found in sidebar.less -->
       <ul class="sidebar-menu">
         <li class="header">MAIN NAVIGATION</li>
-        
+        <li>
+          <a href="home.jsp" >
+            <i class="fa fa-home"></i> <span>Home</span> 
+          </a>
+          
+        </li>
         <li class="treeview">
           <a href="#">
             <i class="fa fa-book"></i> <span>My Tests</span> <i class="fa fa-angle-left pull-right"></i>

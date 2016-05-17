@@ -3,9 +3,7 @@
  */
 package postgreSQLDatabase.registration;
 
-import java.sql.Connection;
 import java.sql.Date;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -20,7 +18,6 @@ import org.json.JSONObject;
 import org.postgresql.util.PGobject;
 
 import exceptions.IncorrectFormatException;
-import settings.database.PostgreSQLConnection;
 import users.Student;
 import utilities.StringPermutation;
 
@@ -30,30 +27,9 @@ import utilities.StringPermutation;
  */
 public class Query {
 
-	static Connection conn;
-	private static PreparedStatement proc;
-
-	/**
-	 * @return a new connection to postgreSQL
-	 * @throws SQLException
-	 */
-	public static Connection getConnection() throws SQLException {
-
-		if (conn == null) {
-			try {
-				Class.forName("org.postgresql.Driver");
-			} catch (ClassNotFoundException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			conn = DriverManager.getConnection("jdbc:postgresql://172.16.1.231:5432/iiitk", "developer", "developer");
-		}
-		return conn;
-	}
-
-	public static void updateVerificationStatus(int status, long reg_id) {
+		public static void updateVerificationStatus(int status, long reg_id) {
 		try {
-			PreparedStatement proc = getConnection()
+			PreparedStatement proc = settings.database.PostgreSQLConnection.getConnection()
 					.prepareStatement("SELECT public.\"updateVerificationStatus\"(?,?);");
 			proc.setInt(1, status);
 			proc.setLong(2, reg_id);
@@ -65,64 +41,30 @@ public class Query {
 
 	}
 
-	public static ArrayList<Student> displayRegistrationData() throws SQLException, IncorrectFormatException {
+	public static ArrayList<Student> getStudentRegistrationList() throws SQLException, IncorrectFormatException {
 		ArrayList<Student> students = null;
 
 		try {
-			PreparedStatement proc = getConnection().prepareStatement("SELECT public.\"displayRegistrationList\"();");
-			// proc.setInt(1,reg_id);
+			PreparedStatement proc = settings.database.PostgreSQLConnection.getConnection().prepareStatement("SELECT * from public.\"getStudentRegistrationList\"();");
 			students = new ArrayList<Student>();
 			ResultSet rs = proc.executeQuery();
-			// System.out.println(proc);
-			rs.next();
+			
 
-			JSONArray jArray = new JSONArray(rs.getString(1));
-
-			for (int i = 0; i < jArray.length(); i++) {
-				JSONObject current_object = jArray.getJSONObject(i);
-				Student current = new Student();
-				current.setName(current_object.get("name").toString());
-				current.setVerification_status(current_object.getInt("verification_status"));
-				current.setFirst_name(current_object.get("first_name").toString());
-				current.setMiddle_name(current_object.get("middle_name").toString());
-				current.setLast_name(current_object.get("last_name").toString());
-				current.setCategory(current_object.get("category").toString());
-				// current.setJee_adv_rollno(current_object.getInt("jee_adv_rollno"));
-				// current.setJee_main_rollno(current_object.getInt("jee_main_rollno"));
-				current.setState_eligibility(current_object.get("state").toString());
-				current.setMobile(current_object.get("phone_number").toString());
-				current.setEmail(current_object.get("email").toString());
-				current.setDate_of_birth(current_object.get("date_of_birth").toString());
-				current.setProgram_allocated(current_object.get("program_allocated").toString());
-				// current.setAllocated_category(current_object.get("allocated_category"));
-				// current.setAllocated_rank(current_object.getInt("allocated_rank"));
-				current.setStatus(current_object.get("status").toString());
-				// current.setChoice_no(current_object.getInt("choice_no"));
-				current.setPwd(current_object.getBoolean("physically_disabled"));
-				current.setGender(current_object.get("gender").toString());
-				// current.setQuota(current_object.get("quota"));
-				// current.setRound(current_object.getInt("round"));
-				// current.setWillingness(current_object.getString("willingness"));
-				// current.setPermanent_address(current_object.getString("address"));
-				// current.setRc_name(current_object.getString("rc_name"));
-				current.setNationality(current_object.get("nationality").toString());
-				current.setRegistration_id(current_object.getInt("id"));
-				// current.setEntry_time(new java.sql.Date(new
-				// SimpleDateFormat("YYYY-MM-DD
-				// HH:mm:SS.SSSSSS").parse(current_object.get("entry_date")).getTime()));
-				current.setVerified(current_object.getBoolean("verified"));
+			Student current;
+			while (rs.next()) {
+				current = new Student(rs);
+				
 				students.add(current);
 			}
 			Iterator<Student> iterator = students.iterator();
 			while (iterator.hasNext()) {
-				Student current = iterator.next();
-				// System.out.println(current.getRegistration_id()+"
-				// "+current.getName());
+				Student curr = iterator.next();
+				 System.out.println(curr.getRegistration_id()+curr.getName());
 			}
 
 			rs.close();
 			proc.close();
-		} catch (JSONException e) {
+		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
@@ -138,7 +80,7 @@ public class Query {
 	 */
 	public static String registerUser(String username, String name, String user_type) {
 		try {
-			PreparedStatement proc = getConnection().prepareStatement("SELECT public.\"addUser\"(?,?,?);");
+			PreparedStatement proc = settings.database.PostgreSQLConnection.getConnection().prepareStatement("SELECT public.\"addUser\"(?,?,?);");
 			proc.setString(1, username);
 			proc.setString(2, name);
 			proc.setString(3, user_type);
@@ -157,7 +99,7 @@ public class Query {
 	public static JSONObject retrieveUsernameGenParameters(long reg_id) {
 		JSONObject current_object = null;
 		try {
-			PreparedStatement proc = getConnection()
+			PreparedStatement proc = settings.database.PostgreSQLConnection.getConnection()
 					.prepareStatement("SELECT public.\"retrieveUsernameGenParameters\"(?);");
 			proc.setLong(1, reg_id);
 			ResultSet rs = proc.executeQuery();
@@ -174,13 +116,13 @@ public class Query {
 	public static ArrayList<Student> getCsabStudentList() throws SQLException, IncorrectFormatException {
 		ArrayList<Student> students = null;
 		try {
-			PreparedStatement proc = getConnection().prepareStatement("SELECT public.\"displayCsabList\"();");
+			PreparedStatement proc = settings.database.PostgreSQLConnection.getConnection().prepareStatement("SELECT public.\"displayCsabList\"();");
 
 			students = new ArrayList<Student>();
 			ResultSet rs = proc.executeQuery();
 			// System.out.println(proc);
 			rs.next();
-
+//TODO Add null handling 
 			JSONArray jArray = new JSONArray(rs.getString(1));
 
 			for (int i = 0; i < jArray.length(); i++) {
@@ -277,7 +219,7 @@ public class Query {
 		Student current = new Student();
 		JSONObject current_object = null;
 		try {
-			PreparedStatement proc = getConnection().prepareStatement("SELECT public.\"displayCsabProfile\"(?);");
+			PreparedStatement proc = settings.database.PostgreSQLConnection.getConnection().prepareStatement("SELECT public.\"displayCsabProfile\"(?);");
 			proc.setLong(1, csab_id);
 
 			ResultSet rs = proc.executeQuery();
@@ -333,7 +275,7 @@ public class Query {
 	public static Student getRegistrationStudentData(Long reg_id) throws SQLException, IncorrectFormatException {
 		Student current = new Student();
 		try {
-			PreparedStatement proc = getConnection()
+			PreparedStatement proc = settings.database.PostgreSQLConnection.getConnection()
 					.prepareStatement("SELECT public.\"retrieveRegistrationStudentData\"(?);");
 			proc.setLong(1, reg_id);
 System.out.println(proc);
@@ -396,7 +338,7 @@ System.out.println(proc);
 	public static Student getStudentProfile(Long erp_id) throws SQLException, IncorrectFormatException {
 		Student current = new Student();
 		try {
-			PreparedStatement proc = getConnection()
+			PreparedStatement proc = settings.database.PostgreSQLConnection.getConnection()
 					.prepareStatement("SELECT public.\"retrieveStudentProfile\"(?);");
 			proc.setLong(1, erp_id);
 
@@ -454,7 +396,7 @@ System.out.println(proc);
 	}
 	public static JSONArray retrieveRegistrationData() throws SQLException {
 
-		PreparedStatement proc = getConnection().prepareStatement("SELECT public.\"displayRegistrationList\"();");
+		PreparedStatement proc = settings.database.PostgreSQLConnection.getConnection().prepareStatement("SELECT public.\"displayRegistrationList\"();");
 		ResultSet rs = proc.executeQuery();
 		// System.out.println(proc);
 		rs.next();
@@ -466,7 +408,7 @@ System.out.println(proc);
 
 	public static void updateVerified(int reg_id) {
 		try {
-			PreparedStatement proc = getConnection().prepareStatement("SELECT public.\"updateVerified\"(?);");
+			PreparedStatement proc = settings.database.PostgreSQLConnection.getConnection().prepareStatement("SELECT public.\"updateVerified\"(?);");
 			proc.setInt(1, reg_id);
 			
 			proc.executeQuery();
@@ -480,7 +422,7 @@ System.out.println(proc);
 	public static JSONObject getRegistrationStudentDataUpdateJSON(Long reg_id) throws SQLException, IncorrectFormatException {
 		
 		
-			PreparedStatement proc = getConnection()
+			PreparedStatement proc = settings.database.PostgreSQLConnection.getConnection()
 					.prepareStatement("SELECT public.\"retrieveStudentRegistrationDataUpdate\"(?);");
 			proc.setLong(1, reg_id);
 
@@ -496,7 +438,7 @@ System.out.println(proc);
 	public static Student getRegistrationStudentDataUpdate(Long reg_id) throws SQLException, IncorrectFormatException {
 		Student current = new Student();
 		try {
-			PreparedStatement proc = getConnection()
+			PreparedStatement proc = settings.database.PostgreSQLConnection.getConnection()
 					.prepareStatement("SELECT public.\"retrieveRegistrationStudentDataUpdate\"(?);");
 			proc.setLong(1, reg_id);
 
@@ -555,7 +497,7 @@ System.out.println(proc);
 	}
 
 	public static void addUpdateStudentRegistrationDetails(Student student) throws SQLException {
-		PreparedStatement proc = getConnection().prepareStatement(
+		PreparedStatement proc = settings.database.PostgreSQLConnection.getConnection().prepareStatement(
 				"SELECT public.\"addUpdateRegistrationStudentDetails\"(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);");
 //text, text, text, text, text, integer, text, text, text, text, text, text, text, text, boolean, json, text, text
 		proc.setString(1, student.getFirst_name());
@@ -593,7 +535,7 @@ System.out.println(proc);
 	}
 
 	public static void applyUpdate(long reg_id) throws SQLException {
-		PreparedStatement proc = getConnection().prepareStatement("SELECT public.\"applyUpdate\"(?);");
+		PreparedStatement proc = settings.database.PostgreSQLConnection.getConnection().prepareStatement("SELECT public.\"applyUpdate\"(?);");
 		proc.setLong(1, reg_id);
 		proc.executeQuery();
 	}
@@ -603,7 +545,7 @@ System.out.println(proc);
 		try {
 			int status = getRegistrationStudentData(reg_id).getVerification_status();
             return status;
-//			proc = settings.database.PostgreSQLConnection.getConnection()
+//			proc = settings.database.PostgreSQLConnection.settings.database.PostgreSQLConnection.getConnection()
 //					.prepareStatement("SELECT public.\"existsRegId\"(?);");
 //			proc.setLong(1, reg_id);
 //			ResultSet rs = proc.executeQuery();
@@ -611,7 +553,7 @@ System.out.println(proc);
 //			
 //			System.out.println("ID exists " + rs.getBoolean(1));
 //			if (rs.getBoolean(1)) {
-//				proc = PostgreSQLConnection.getConnection()
+//				proc = PostgreSQLConnection.settings.database.PostgreSQLConnection.getConnection()
 //						.prepareStatement("SELECT public.\"retrieveRegistrationStatus\"(?);");
 //				proc.setLong(1, reg_id);
 //				rs = proc.executeQuery();
@@ -638,7 +580,7 @@ System.out.println(proc);
 
 	public static int reportStudent(int csab_id) {
 		try {
-			PreparedStatement proc = getConnection().prepareStatement("SELECT public.\"report_student\"(?);");
+			PreparedStatement proc = settings.database.PostgreSQLConnection.getConnection().prepareStatement("SELECT public.\"report_student\"(?);");
 			proc.setInt(1, csab_id);
 			ResultSet rs = proc.executeQuery();
 			rs.next();
@@ -655,7 +597,7 @@ System.out.println(proc);
 	public static void retrieveStudentList() {
 		PreparedStatement proc;
 		try {
-			proc = getConnection().prepareStatement("SELECT \"retrieveStudentList\"();");
+			proc = settings.database.PostgreSQLConnection.getConnection().prepareStatement("SELECT \"retrieveStudentList\"();");
 
 			ResultSet rs = proc.executeQuery();
 			rs.next();
@@ -683,7 +625,7 @@ System.out.println(proc);
 		 UsernameGeneration ug=null;
 		 ArrayList<String> usernames=new ArrayList<String>();
 		try {
-			PreparedStatement proc = getConnection().prepareStatement("SELECT public.\"getUsernameGenerationData\"(?);");
+			PreparedStatement proc = settings.database.PostgreSQLConnection.getConnection().prepareStatement("SELECT public.\"getUsernameGenerationData\"(?);");
 		    proc.setLong(1, reg_id);
 		    ResultSet rs=proc.executeQuery();
 		    rs.next();
@@ -712,7 +654,7 @@ System.out.println(proc);
 		// retrieveStudentList();
 		long id = 69;
 		try {
-			getRegistrationStudentData((long) (69));
+			getStudentRegistrationList();
 		} catch (SQLException | IncorrectFormatException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

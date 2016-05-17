@@ -19,7 +19,11 @@ import exceptions.SessionException;
 /**
  * Servlet Filter implementation class SessionFilter
  */
-@WebFilter("/SessionFilter")
+@WebFilter(
+        urlPatterns = {"/SessionFilter","/student/*","/office/*","/administration/*"},
+        filterName = "SessionFilter",
+        description = "Filter all admin URLs"       
+)
 public class Session implements Filter {
 
     /**

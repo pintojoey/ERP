@@ -7,8 +7,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import csv.Parser;
-import ldap.SimpleLdapAuthentication;
-import postgreSQLDatabase.registration.Query;
 import utilities.StringFormatter;
 
 /**
@@ -16,7 +14,7 @@ import utilities.StringFormatter;
  *
  */
 public class ImportCSV {
-	Parser obj=new csv.Parser();
+	Parser obj=new csv.Parser("registration.csv");
 	
 	/**
 	 * @param args
@@ -31,7 +29,7 @@ public class ImportCSV {
 	}
 	public ArrayList<StudentWrapper> getCSV(String...s) throws IOException{
 		
-		obj.run("F://TableToImport.csv");
+	//	obj.run("F://TableToImport.csv");
 		int k=0;
 		int j[]=new int[s.length];
 		//String username,first_name,last_name,password;

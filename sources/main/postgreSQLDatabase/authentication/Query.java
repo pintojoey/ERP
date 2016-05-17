@@ -20,11 +20,12 @@ public class Query {
 		System.out.println(input);
 		JSONArray jArray = null;
 		try {
-			PreparedStatement proc = settings.database.PostgreSQLConnection.getConnection().prepareStatement("SELECT public.\"getUserAutoSuggest\"(?);");
+			PreparedStatement proc = settings.database.PostgreSQLConnection.getConnection().prepareStatement("SELECT * from public.\"getUserAutoSuggest\"(?);");
 			proc.setString(1, input);
 			ResultSet rs = proc.executeQuery();
 			rs.next();
-			jArray = new JSONArray(rs.getString(1));
+			System.out.println(rs.getString(1));
+		//	jArray = new JSONArray(rs.getString(1));
 		}
 		catch (Exception e){
 			e.printStackTrace();
@@ -52,7 +53,7 @@ public static String getUserUsername(Long erp_id){
 	
 }
 public static void main(String[] args) {
-	//getUserUsername(1000000106);
+	getAutoSuggest("jo");
 }
 
 }

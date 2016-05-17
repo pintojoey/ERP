@@ -35,7 +35,7 @@ public class SimpleLdapAuthentication
 		Hashtable<String, String> env = 
 				new Hashtable<String, String>();
 		env.put(Context.INITIAL_CONTEXT_FACTORY, "com.sun.jndi.ldap.LdapCtxFactory");
-		env.put(Context.PROVIDER_URL, "ldap://172.16.1.231:389");
+		env.put(Context.PROVIDER_URL, "ldap://192.168.0.104:389");
 		env.put(Context.SECURITY_AUTHENTICATION, "none");
 
 		SearchControls searchCtrls = new SearchControls();
@@ -99,7 +99,7 @@ public class SimpleLdapAuthentication
 				new Hashtable<String, String>();
 
 		env.put(Context.INITIAL_CONTEXT_FACTORY, "com.sun.jndi.ldap.LdapCtxFactory");
-		env.put(Context.PROVIDER_URL, "ldap://172.16.1.231:389");
+		env.put(Context.PROVIDER_URL, "ldap://192.168.0.104:389");
 		env.put(Context.SECURITY_AUTHENTICATION, "simple");
 		env.put(Context.SECURITY_PRINCIPAL, "cn=admin,dc=iiitk,dc=ac,dc=in");
 		env.put(Context.SECURITY_CREDENTIALS, "iiitk_2013");
@@ -162,7 +162,7 @@ public class SimpleLdapAuthentication
 	public static void changePassword(String username,String new_password){
 		Hashtable<String, String> env = new Hashtable<String, String>();
 		env.put(Context.INITIAL_CONTEXT_FACTORY,"com.sun.jndi.ldap.LdapCtxFactory");
-		env.put(Context.PROVIDER_URL,"ldap://172.16.1.231:389");
+		env.put(Context.PROVIDER_URL,"ldap://192.168.0.104:389");
 		env.put(Context.SECURITY_AUTHENTICATION,"simple");
 		env.put(Context.SECURITY_PRINCIPAL,"cn=admin,dc=iiitk,dc=ac,dc=in");
 		env.put(Context.SECURITY_CREDENTIALS,"iiitk_2013");

@@ -28,9 +28,9 @@
 				<div class="col-md-4">
 				
 					<div class="row" style="font-size:80%;">
-					<table><tr><td><img alt="img"  src="<%=ServletUtils.getBaseUrl(request)%>/image/sbi.jpg" class="image pull-right"/>
+					<table><tr><td><img  alt="img" height="65px" width="65px"  src="<%=ServletUtils.getBaseUrl(request)%>/image/sbi.png" class="image pull-right"/>
 						</td><td><p class="text-center" align="center"><b>Indian Institute Of Information Technology Kota(Rajasthan)</b><br/>(Bank Copy)</p></td>
-						<td><img alt="img"  src="http://localhost:8080/erp/image/iiitkota.jpg"/></td>
+						<td><img  alt="img"  height="65px" width="65px" src="<%=ServletUtils.getBaseUrl(request)%>/image/iiitkota-logo.png"/></td>
 						</tr></table>
 						
 					</div>
@@ -124,9 +124,9 @@
 				<div class="col-md-4">
 				
 					<div class="row" style="font-size:80%;">
-					<table><tr><td><img alt="img"  src="<%=ServletUtils.getBaseUrl(request)%>/image/sbi.jpg" class="image pull-right"/>
+					<table><tr><td><img height="65px" width="65px"  alt="img"  src="<%=ServletUtils.getBaseUrl(request)%>/image/sbi.png" class="image pull-right"/>
 						</td><td><p class="text-center" align="center"><b>Indian Institute Of Information Technology Kota(Rajasthan)</b><br/>(Institute Copy)</p></td>
-						<td><img alt="img"  src="http://localhost:8080/erp/image/iiitkota.jpg"/></td>
+						<td><img height="65px" width="65px"  alt="img"  src="http://localhost:8080/erp/image/iiitkota-logo.png"/></td>
 						</tr></table>
 						
 					</div>
@@ -219,9 +219,9 @@
 				<div class="col-md-4">
 				
 					<div class="row" style="font-size:80%;">
-					<table><tr><td><img alt="img"  src="<%=ServletUtils.getBaseUrl(request)%>/image/sbi.jpg" class="image pull-right"/>
+					<table><tr><td><img height="65px" width="65px"  alt="img"  src="<%=ServletUtils.getBaseUrl(request)%>/image/sbi.png" class="image pull-right"/>
 						</td><td><p class="text-center" align="center"><b>Indian Institute Of Information Technology Kota(Rajasthan)</b><br/>(Student Copy)</p></td>
-						<td><img alt="img"  src="http://localhost:8080/erp/image/iiitkota.jpg"/></td>
+						<td><img height="65px" width="65px"  alt="img"  src="http://localhost:8080/erp/image/iiitkota-logo.png"/></td>
 						</tr></table>
 						
 					</div>

@@ -23,9 +23,12 @@ public class PostgreSQLConnection {
 				e.printStackTrace();
 			}
 			conn = DriverManager
-					.getConnection("jdbc:postgresql://172.16.1.231:5432/iiitk",
-							"developer", "developer");
+					.getConnection("jdbc:postgresql://192.168.0.104:5432/iiitk",
+							"postgres", "iiitk_2013");
 		}
 		return conn;
 	}
+public static void closeConnection() throws SQLException{
+if(conn!=null)	conn.close();
+}
 }

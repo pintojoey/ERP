@@ -1,4 +1,6 @@
 <!DOCTYPE html>
+<%@page import="users.Student"%>
+<%@page import="postgreSQLDatabase.registration.Query"%>
 <html>
 <head>
   <meta charset="utf-8">
@@ -47,7 +49,92 @@
     </section>
 
     <!-- Main content -->
-	
+	<%Student student= Query.getStudentProfile(Long.parseLong(session.getAttribute("erpId").toString())); %>
+    <!-- Main content -->
+	<section class="content">
+
+      <div class="row">
+        <div class="col-md-3">
+
+          <!-- Profile Image -->
+          <div class="box box-primary">
+            <div class="box-body box-profile">
+              <img class="profile-user-img img-responsive img-circle" src="../dist/img/user2-160x160.jpg" alt="User profile picture">
+
+              <h3 class="profile-username text-center"><%=student.getName() %></h3>
+
+              <p class="text-muted text-center"><%=student.getStudent_id() %></p>
+
+            </div>
+            <!-- /.box-body -->
+          </div>
+          <!-- /.box -->
+
+          <!-- About Me Box -->
+          <div class="box box-primary">
+            <div class="box-header with-border">
+              <h3 class="box-title">About Me</h3>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+              <strong><i class="fa fa-book margin-r-5"></i> Batch</strong>
+
+              <p class="text-muted">
+               <%=student.getEmail() %>
+              </p>
+
+              <hr>
+
+              <strong><i class="fa fa-file-text-o margin-r-5"></i> ID</strong>
+
+              <p class="text-muted"><%=student.getStudent_id() %></p>
+
+              <hr>
+
+              <strong><i class="fa fa-map-marker margin-r-5"></i> Address</strong>
+
+              <p><%=student.getPermanent_address() %></p>
+            </div>
+            <!-- /.box-body -->
+          </div>
+          <!-- /.box -->
+        </div>
+        <!-- /.col -->
+        <div class="col-md-9">
+          <div class="nav-tabs-custom">
+            <ul class="nav nav-tabs">
+              <li class="active"><a href="#setting" data-toggle="tab">Settings</a></li>
+            </ul>
+            <div class="tab-content">
+              
+              <div class="tab-pane active" id="setting">
+                <form class="form-horizontal">
+                  <div class="form-group">
+                    <label for="inputName" class="col-sm-2 control-label">Contact</label>
+
+                    <div class="col-sm-10">
+                      <label for="inputName" class="col-sm-2 control-label"><%=student.getMobile()%></label>
+                    </div>
+                    
+                  </div>
+                  <div class="form-group">
+                    <label for="inputName" class="col-sm-2 control-label">Email</label>
+
+                    <div class="col-sm-10">
+                      <label for="inputName" class="col-sm-2 control-label"><%=student.getEmail()%></label>
+                    </div>
+                    
+                  </div>
+                  
+                </form>
+                
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  
     <!-- /.content -->
    <%@ include file="chats.jsp" %>
    <script src="../dist/js/chats.js"></script>  

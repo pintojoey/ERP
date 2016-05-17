@@ -13,7 +13,6 @@ import javax.servlet.http.HttpServletResponse;
 import org.json.JSONObject;
 
 import exceptions.IncorrectFormatException;
-import users.Student;
 
 /**
  * Servlet implementation class retrieveRegistrationStudentData

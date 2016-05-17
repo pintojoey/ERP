@@ -10,8 +10,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Calendar;
 
-import postgreSQLDatabase.registration.Query;
-import users.Student;
 import ldap.User;
 
 /**
