@@ -94,7 +94,7 @@
                 </thead>
                 <tbody>
                 <%
-                ArrayList<Student> registration_list=Query.displayRegistrationData();
+                ArrayList<Student> registration_list=Query.getStudentRegistrationList();
                 Iterator<Student> iterator=registration_list.iterator();
                 while(iterator.hasNext()){
     				Student current=iterator.next();

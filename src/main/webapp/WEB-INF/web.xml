@@ -1,8 +1,10 @@
-<!DOCTYPE web-app PUBLIC
-		 "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"
-		 "http://java.sun.com/dtd/web-app_2_3.dtd" >
+<web-app xmlns="http://java.sun.com/xml/ns/javaee"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://java.sun.com/xml/ns/javaee 
+                        http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
+                        version="3.0">
 
-<web-app>
+
 	<display-name>ArchetypeCreatedWebApplication</display-name>
 	<!--student -->
 	<!--office -->
@@ -11,8 +13,6 @@
 	<!--onlineTest -->
 	<servlet>
 		<servlet-name>CreateTestPaper</servlet-name>
-		<display-name>CreateTestPaper</display-name>
-		<description></description>
 		<servlet-class>actions.testPaper.CreateTestPaper</servlet-class>
 	</servlet>
 	<servlet-mapping>
@@ -21,8 +21,6 @@
 	</servlet-mapping>
 	<servlet>
 		<servlet-name>GetQuestion</servlet-name>
-		<display-name>GetQuestion</display-name>
-		<description></description>
 		<servlet-class>actions.testPaper.GetQuestion</servlet-class>
 	</servlet>
 	<servlet-mapping>
@@ -32,8 +30,6 @@
 
 	<servlet>
 		<servlet-name>CreateAnswerSheet</servlet-name>
-		<display-name>CreateAnswerSheet</display-name>
-		<description></description>
 		<servlet-class>actions.testPaper.CreateAnswerSheet</servlet-class>
 	</servlet>
 	<servlet-mapping>
@@ -42,8 +38,6 @@
 	</servlet-mapping>
 	<servlet>
 		<servlet-name>GetSolutionSheet</servlet-name>
-		<display-name>GetSolutionSheet</display-name>
-		<description></description>
 		<servlet-class>actions.testPaper.GetSolutionSheet</servlet-class>
 	</servlet>
 	<servlet-mapping>
@@ -54,8 +48,6 @@
 	<!--gradingModule -->
 	<servlet>
 		<servlet-name>RetrieveSubjects</servlet-name>
-		<display-name>RetrieveSubjects</display-name>
-		<description></description>
 		<servlet-class>actions.gradingModule.RetrieveSubjects</servlet-class>
 	</servlet>
 	<servlet-mapping>
@@ -65,8 +57,6 @@
 	<!--registration -->
 	<servlet>
 		<servlet-name>RegistrationLogin</servlet-name>
-		<display-name>RegistrationLogin</display-name>
-		<description></description>
 		<servlet-class>actions.registration.RegistrationLogin</servlet-class>
 	</servlet>
 	<servlet-mapping>
@@ -75,8 +65,6 @@
 	</servlet-mapping>
 	<servlet>
 		<servlet-name>ReportStudent</servlet-name>
-		<display-name>ReportStudent</display-name>
-		<description></description>
 		<servlet-class>actions.registration.ReportStudent</servlet-class>
 	</servlet>
 	<servlet-mapping>
@@ -85,8 +73,6 @@
 	</servlet-mapping>
 	<servlet>
 		<servlet-name>VerifyStudent</servlet-name>
-		<display-name>VerifyStudent</display-name>
-		<description></description>
 		<servlet-class>actions.registration.VerifyStudent</servlet-class>
 	</servlet>
 	<servlet-mapping>
@@ -95,8 +81,6 @@
 	</servlet-mapping>
 	<servlet>
 		<servlet-name>StudentServletTemplate</servlet-name>
-		<display-name>StudentServletTemplate</display-name>
-		<description></description>
 		<servlet-class>actions.registration.StudentServletTemplate</servlet-class>
 	</servlet>
 	<servlet-mapping>
@@ -105,8 +89,6 @@
 	</servlet-mapping>
 	<servlet>
 		<servlet-name>UpdateStudentRegistrationData</servlet-name>
-		<display-name>UpdateStudentRegistrationData</display-name>
-		<description></description>
 		<servlet-class>actions.registration.UpdateStudentRegistrationData</servlet-class>
 	</servlet>
 	<servlet-mapping>
@@ -115,8 +97,6 @@
 	</servlet-mapping>
 	<servlet>
 		<servlet-name>addUpdateStudentRegistrationDetails</servlet-name>
-		<display-name>addUpdateStudentRegistrationDetails</display-name>
-		<description></description>
 		<servlet-class>actions.registration.addUpdateStudentRegistrationDetails</servlet-class>
 	</servlet>
 	<servlet-mapping>
@@ -127,8 +107,6 @@
 	<!--notification -->
 	<servlet>
 		<servlet-name>MarkAsRead</servlet-name>
-		<display-name>MarkAsRead</display-name>
-		<description></description>
 		<servlet-class>actions.notifications.MarkAsRead</servlet-class>
 	</servlet>
 	<servlet-mapping>
@@ -138,8 +116,6 @@
 
 	<servlet>
 		<servlet-name>RetriveNotifications</servlet-name>
-		<display-name>RetriveNotifications</display-name>
-		<description></description>
 		<servlet-class>actions.notifications.RetriveNotifications</servlet-class>
 	</servlet>
 	<servlet-mapping>
@@ -147,31 +123,21 @@
 		<url-pattern>/RetriveNotifications</url-pattern>
 	</servlet-mapping>
 
-	
-	
 	<servlet>
 		<servlet-name>VerifyFeePayment</servlet-name>
-		<display-name>VerifyFeePayment</display-name>
-		<description></description>
 		<servlet-class>actions.feePayment.VerifyFeePayment</servlet-class>
 	</servlet>
 	<servlet>
 		<servlet-name>UploadMultipleFiles</servlet-name>
-		<display-name>UploadMultipleFiles</display-name>
-		<description></description>
 		<servlet-class>actions.files.UploadMultipleFiles</servlet-class>
 	</servlet>
 	<servlet>
 		<servlet-name>FileUpload</servlet-name>
-		<display-name>FileUpload</display-name>
-		<description></description>
 		<servlet-class>actions.files.FileUpload</servlet-class>
 	</servlet>
 	
 	<servlet>
 		<servlet-name>RegisterStudent</servlet-name>
-		<display-name>RegisterStudent</display-name>
-		<description></description>
 		<servlet-class>actions.registration.RegisterStudent</servlet-class>
 	</servlet>
 
@@ -184,8 +150,6 @@
 	<!--chats -->
 	<servlet>
 		<servlet-name>RetrieveMessage</servlet-name>
-		<display-name>RetrieveMessage</display-name>
-		<description></description>
 		<servlet-class>actions.chats.RetrieveMessage</servlet-class>
 	</servlet>
 	<servlet-mapping>
@@ -195,8 +159,6 @@
 
 	<servlet>
 		<servlet-name>RetrieveConversationsInfo</servlet-name>
-		<display-name>RetrieveConversationsInfo</display-name>
-		<description></description>
 		<servlet-class>actions.chats.RetrieveConversationsInfo</servlet-class>
 	</servlet>
 	<servlet-mapping>
@@ -207,8 +169,6 @@
 
 	<servlet>
 		<servlet-name>NewMessage</servlet-name>
-		<display-name>NewMessage</display-name>
-		<description></description>
 		<servlet-class>actions.chats.NewMessage</servlet-class>
 	</servlet>
 	<servlet-mapping>
@@ -217,8 +177,6 @@
 	</servlet-mapping>
 	<servlet>
 		<servlet-name>RetrieveAllMessages</servlet-name>
-		<display-name>RetrieveAllMessages</display-name>
-		<description></description>
 		<servlet-class>actions.chats.RetrieveAllMessages</servlet-class>
 	</servlet>
 	<servlet-mapping>
@@ -228,8 +186,6 @@
 
 	<servlet>
 		<servlet-name>ReadAllMessages</servlet-name>
-		<display-name>ReadAllMessages</display-name>
-		<description></description>
 		<servlet-class>actions.chats.ReadAllMessages</servlet-class>
 	</servlet>
 	<servlet-mapping>
@@ -239,8 +195,6 @@
 	<!--feePayment -->
 	<servlet>
 		<servlet-name>AddPaymentInfo</servlet-name>
-		<display-name>AddPaymentInfo</display-name>
-		<description></description>
 		<servlet-class>actions.feePayment.AddPaymentInfo</servlet-class>
 	</servlet>
 	<servlet-mapping>
@@ -249,7 +203,6 @@
 	</servlet-mapping>
 	<servlet>
 		<servlet-name>FeeBreakup</servlet-name>
-		<display-name>FeeBreakup</display-name>
 		<servlet-class>actions.feePayment.FeeBreakup</servlet-class>
 	</servlet>
 	<servlet-mapping>
@@ -260,8 +213,6 @@
 	<!--grading module -->
 	<servlet>
 		<servlet-name>ExportGradesheet</servlet-name>
-		<display-name>ExportGradesheet</display-name>
-		<description></description>
 		<servlet-class>actions.gradingModule.ExportGradesheet</servlet-class>
 	</servlet>
 	<servlet-mapping>
@@ -271,8 +222,6 @@
 	<!--remaining -->
 	<servlet>
 		<servlet-name>GenerateChallan</servlet-name>
-		<display-name>GenerateChallan</display-name>
-		<description></description>
 		<servlet-class>feePayment.GenerateChallan</servlet-class>
 	</servlet>
 	<servlet-mapping>
@@ -282,27 +231,19 @@
 
 	<servlet>
 		<servlet-name>Login</servlet-name>
-		<display-name>Login</display-name>
-		<description></description>
 		<servlet-class>actions.registration.Login</servlet-class>
 	</servlet>
 	<servlet>
 		<servlet-name>CsabStudentProfile</servlet-name>
-		<display-name>CsabStudentProfile</display-name>
-		<description></description>
 		<servlet-class>actions.registration.CsabStudentProfile</servlet-class>
 	</servlet>
 	
 	<servlet>
 		<servlet-name>RetrieveRegistrationStudentData</servlet-name>
-		<display-name>RetrieveRegistrationStudentData</display-name>
-		<description></description>
 		<servlet-class>actions.registration.RetrieveRegistrationStudentData</servlet-class>
 	</servlet>
 	<servlet>
 		<servlet-name>AddLdapUser</servlet-name>
-		<display-name>AddLdapUser</display-name>
-		<description></description>
 		<servlet-class>actions.registration.AddLdapUser</servlet-class>
 	</servlet>
 	
@@ -342,32 +283,22 @@
 	<!-- forms -->
 	<servlet>
 		<servlet-name>RetrieveForms</servlet-name>
-		<display-name>RetrieveForms</display-name>
-		<description></description>
 		<servlet-class>actions.forms.RetrieveForms</servlet-class>
 	</servlet>
 <servlet>
 		<servlet-name>createpdf</servlet-name>
-		<display-name>createpdf</display-name>
-		<description></description>
 		<servlet-class>actions.forms.createpdf</servlet-class>
 	</servlet>
 	<servlet>
 		<servlet-name>Bonafide</servlet-name>
-		<display-name>Bonafide</display-name>
-		<description></description>
 		<servlet-class>actions.forms.Bonafide</servlet-class>
 	</servlet>
 	<servlet>
 		<servlet-name>GeneratePDF</servlet-name>
-		<display-name>GeneratePDF</display-name>
-		<description></description>
 		<servlet-class>actions.utilities.GeneratePDF</servlet-class>
 	</servlet>
 	<servlet>
 		<servlet-name>GenerateFeeReceipt</servlet-name>
-		<display-name>GenerateFeeReceipt</display-name>
-		<description></description>
 		<servlet-class>actions.feePayment.GenerateFeeReceipt</servlet-class>
 	</servlet>
 <servlet-mapping>

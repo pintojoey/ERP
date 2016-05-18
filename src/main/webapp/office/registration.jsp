@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<%@page import="users.Student"%>
 <%@page import="postgreSQLDatabase.registration.Query"%>
 <html>
 <head>
@@ -58,7 +59,7 @@
 		<script src="../dist/js/reportStudent.js"></script>
 		<%@ page import="java.util.ArrayList"%>
 		<%@ page import="java.util.Iterator"%>
-		<%@ page import="users.Student"%>
+		
 
 
 
@@ -293,7 +294,7 @@
 									</thead>
 									<tbody>
 										<%
-										ArrayList<Student> registration_list=Query.displayRegistrationData();
+										ArrayList<Student> registration_list=Query.getStudentRegistrationList();
 										Iterator<Student> iterator=registration_list.iterator();
                  while(iterator.hasNext()){
     				Student current=iterator.next();
