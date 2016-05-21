@@ -38,7 +38,7 @@ public class CronScheduler {
 	public static void addJob(Class<? extends Job> jobclass,Date triggerStartTime) throws SchedulerException{
 		JobDetail job = JobBuilder.newJob(jobclass)
     			.withIdentity("helloJob", "group1").build();
-		
+		job.getJobDataMap().put("data","Hello guys");
 		Trigger trigger = TriggerBuilder.newTrigger()
 	    		  .withIdentity("simpleTrigger", "group1")
 	    		  .startAt(triggerStartTime).build();

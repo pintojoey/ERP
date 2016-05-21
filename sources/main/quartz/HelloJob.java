@@ -20,6 +20,7 @@ public class HelloJob implements Job{
 	@Override
 	public void execute(JobExecutionContext context) throws JobExecutionException {
 		// TODO Auto-generated method stub
-		System.out.println("Hello Job");
+	String data= 	(String) context.getMergedJobDataMap().get("data");
+		System.out.println(data);
 	}
 }
